@@ -1,0 +1,53 @@
+No JavaScript, a diferença entre usar {} ao importar um módulo e não usar está diretamente relacionada ao tipo de exportação definida no arquivo de origem. Essa escolha afeta a maneira como as funções ou objetos são exportados e importados entre arquivos, garantindo flexibilidade no uso de módulos. Vamos entender as duas situações:
+
+1. Importação com {} – Exportações Nomeadas
+Esse tipo de importação é usado para exportar e importar partes específicas de um módulo. Ao usar {}, estamos dizendo ao JavaScript para buscar apenas as exportações nomeadas que especificamos.
+
+Como funciona:
+No arquivo de origem (exemplo: adicionarItem.js), você precisa exportar explicitamente cada item que deseja disponibilizar, usando export.
+// Exportação nomeada
+export function adicionarItem(evento) {
+    // código da função
+}
+
+export function criarItemDaLista() {
+    // código da função
+}
+
+Ao importar, você precisa mencionar os nomes exatos das exportações, utilizando {}:
+import { adicionarItem, criarItemDaLista } from "./js/adicionarItem.js";
+
+Isso é útil quando o módulo oferece várias funções ou objetos e você quer usar apenas alguns deles. Importações nomeadas também permitem combinar diversas exportações de diferentes módulos:
+import { adicionarItem } from "./js/adicionarItem.js";
+import { formatarTexto } from "./js/utilitarios.js";
+
+2. Importação sem {} – Exportação Padrão
+Quando um módulo define uma exportação padrão (default), ele permite exportar uma única funcionalidade principal. Nesse caso, não usamos {} ao importar, e o nome que você atribui durante a importação pode ser qualquer um.
+
+Como funciona:
+
+No arquivo de origem, a exportação padrão é declarada com export default:
+// Exportação padrão
+export default function adicionarItem(evento) {
+    // código da função
+}
+
+Ao importar, você pode usar qualquer nome para representar o módulo:
+import adicionarItem from "./js/adicionarItem.js";
+// Ou
+import qualquerNome from "./js/adicionarItem.js";
+
+Isso é útil quando o módulo tem um propósito único, como uma função principal, e você quer simplificar o uso.
+
+Principais diferenças:
+Exportação Nomeada	                      Exportação Padrão
+Usa {} na importação.	                  Não usa {} na importação.
+Permite exportar múltiplas partes.	      Exporta uma única funcionalidade.
+Precisa do nome exato da exportação.	  O nome na importação pode ser qualquer.
+Exemplo: export function adicionarItem()  Exemplo: export default function adicionarItem()
+
+Quando usar cada uma?
+Use exportações nomeadas quando seu módulo contém múltiplas funções ou objetos que podem ser usados separadamente.
+Use exportação padrão quando seu módulo tem uma funcionalidade central ou única.
+Com essas distinções, você pode estruturar seu código de forma mais clara e aproveitar ao máximo os módulos no JavaScript!
+
